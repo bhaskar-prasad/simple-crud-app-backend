@@ -3,6 +3,9 @@ const mongoose = require("mongoose");
 const Product = require("./models/product.model.js");
 const productRoute = require("./routes/product.route.js");
 const app = express();
+const dotenv = require("dotenv");
+dotenv.config();
+const mongoUrl = process.env.MONGO_URL;
 
 // middleware
 app.use(express.json());
@@ -22,12 +25,12 @@ app.get("/", (req, res) => {
 
 mongoose
   .connect(
-    "mongodb+srv://bhaskarsco:dxzSYOzrHstEPPGc@cluster0.4h5vs.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    mongoUrl
   )
   .then(() => {
     console.log("Connected to database!");
-    app.listen(3000, () => {
-      console.log("Server is running on port 3000");
+    app.listen(4000, () => {
+      console.log("Server is running on port 4000");
     });
   })
   .catch(() => {
